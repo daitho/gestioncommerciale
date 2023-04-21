@@ -2,6 +2,7 @@ package com.mia.itmf.formation.gestioncommerciale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -55,6 +56,16 @@ public class TestProduit {
 		gestionProduit.afficherProduit(1);
 	}
 	
+	@AfterAll
+	public static void supprimerTousLesTest() {
+		gestionProduit.supprimerProduit(gestionProduit.retrouverProduit(1));
+		gestionProduit.supprimerProduit(gestionProduit.retrouverProduit(2));
+		gestionProduit.supprimerProduit(gestionProduit.retrouverProduit(3));
+		gestionProduit.supprimerProduit(gestionProduit.retrouverProduit(4));
+		gestionProduit.supprimerProduit(gestionProduit.retrouverProduit(5));
+		gestionProduit.supprimerProduit(gestionProduit.retrouverProduit(6));
+		System.out.println("Clients supprimés !" );
+	}
 	
 
 }

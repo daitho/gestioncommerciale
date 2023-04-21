@@ -1,7 +1,6 @@
 package com.mia.itmf.formation.gestioncommerciale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -56,9 +55,9 @@ public class TestClient {
 	
 	@AfterAll
 	public static void supprimerTousLesTest() {
-		gestionClient.supprimerClient(new Client(1,"Dupond","Pierre","Nantes", "0602339232","dupondp@gmail.com"));
-		gestionClient.supprimerClient(new Client(2,"Thomas","Paul","Paris", "0602234232","thomaspa@gmail.com"));
-		gestionClient.supprimerClient(new Client(3,"Jean","Joseph","Limoges", "0604565332","jeanjo@gmail.com"));
+		gestionClient.supprimerClient(gestionClient.retrouverClient(1));
+		gestionClient.supprimerClient(gestionClient.retrouverClient(2));
+		gestionClient.supprimerClient(gestionClient.retrouverClient(3));
 		System.out.println("Clients supprimés !" );
 	}
 }
