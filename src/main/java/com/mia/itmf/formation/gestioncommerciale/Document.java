@@ -109,11 +109,9 @@ public abstract class Document {
 	@Override
 	public String toString() {
 		//this.statutListeDetail = true;
+		this.montant = calculMontant();
 		try {
-			return  getKey()+
-					"\nNom du client: "+this.client.getNom()+" "+this.client.getPrenom()+""
-					+"Date : " + this.date+""
-					+ "\nMontant total "+calculMontant()+"€";
+			return  getKey()+" Nom du client: "+this.client.getNom()+" "+this.client.getPrenom()+" "+"Date : " + this.date+" "+ "Montant total "+getMontant()+"€";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

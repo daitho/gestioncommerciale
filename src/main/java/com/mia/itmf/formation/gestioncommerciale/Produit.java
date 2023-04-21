@@ -42,6 +42,12 @@ public class Produit {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
+
+	@Override
+	public String toString() {
+		return "Produit [codeProduit=" + getCodeProduit() + ", libelle=" + getLibelle() + ", prix=" + getPrix() + "]";
+	}
+	
 	
 	
 	

@@ -12,10 +12,10 @@ public class Devis extends Document {
 		super(code, date, montant, client);
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Devis\n\"Nom et prénom:  " + this.getClient().getNom() +" "+this.getClient().getPrenom() +" calculMontant()=" + this.calculMontant();
-//	}
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 
 	public String getKey() throws Exception {
 		//throw new Exception("La methode getKey doit être surcharger");

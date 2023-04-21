@@ -17,7 +17,10 @@ public class Commande extends Document {
 		//throw new Exception("La methode getKey doit être surcharger");
 		return "Commande-"+getCode();
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+	
 }

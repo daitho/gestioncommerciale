@@ -72,8 +72,8 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client [idClient=" + getIdClient() + ", nom=" + getNom() + ", prenom=" + prenom + ", adresse=" + adresse
-				+ ", telephone=" + telephone + ", email=" + email + "]";
+		return "Client [idClient=" + getIdClient() + ", nom=" + getNom() + ", prenom=" + getPrenom() + ", adresse=" + getAdresse()
+				+ ", telephone=" + getTelephone() + ", email=" + getEmail() + "]";
 	}
 	
 	

@@ -94,7 +94,7 @@ public class GestionClient {
     	return clients;
     }
     
-    public int NombreDeClientPar(){
+    public int getNombreClient(){
     	return mapClient.size();
     }
 

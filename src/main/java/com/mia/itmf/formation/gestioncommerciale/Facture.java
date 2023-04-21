@@ -16,10 +16,9 @@ public class Facture extends Document {
 		return "Facture-"+getCode();
 	}
 	
-//	@Override
-//	public String toString() {
-//		return "Facture : "+this.calculMontant()+""
-//				+"\n"+super.toString();
-//	}
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 	
 }
