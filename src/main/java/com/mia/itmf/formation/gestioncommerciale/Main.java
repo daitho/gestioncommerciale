@@ -22,10 +22,10 @@ public class Main {
 		
 		//Initialisation de Produit
 		GestionProduit gestionProduit = new GestionProduit();
-		gestionProduit.initialisationProduit();
+		//gestionProduit.initialisationProduit();
 		gestionProduit.afficherProduit(1);
 		gestionProduit.afficherProduit(gestionProduit.rechercherProduitParPrix(30));
-		System.out.println(gestionProduit.getTaille());
+		System.out.println(gestionProduit.getTailleProduit());
 		
 		GestionFacture gestionFacture = new GestionFacture();
 		Facture facture1 = gestionFacture.ajouterFacture(1, gestionClient.retrouverClient(2));

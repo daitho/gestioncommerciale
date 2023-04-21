@@ -8,23 +8,7 @@ import java.util.Map;
 import com.mia.itmf.formation.gestioncommerciale.Produit;
 
 public class GestionProduit {
-	private Map<Integer, Produit> map;
-	
-	//Initialisation du produit
-		public void initialisationProduit() {
-			map = new HashMap<Integer, Produit>();
-			
-			ajoutProduit(new Produit(1,"Pomme",100));
-			ajoutProduit(new Produit(2,"Tomate",50));
-			ajoutProduit(new Produit(3,"Haricot",60));
-			ajoutProduit(new Produit(4,"Mangue",40));
-			ajoutProduit(new Produit(5,"Banane",30));
-			ajoutProduit(new Produit(6,"Orange",15));
-			
-			System.out.println("Produit initialisé !" );
-			
-			
-		}
+	private Map<Integer, Produit> map = new HashMap<Integer, Produit>();
 		
 		//Ajout d'un produit
 		public void ajoutProduit(Produit produit) {
@@ -110,7 +94,7 @@ public class GestionProduit {
 		}
 	    
 	    //Afficher la taille de la map
-	    public int getTaille() {
+	    public int getTailleProduit() {
 	    	return map.size();
 	    }
 

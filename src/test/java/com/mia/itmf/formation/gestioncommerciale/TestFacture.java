@@ -1,10 +1,10 @@
 package com.mia.itmf.formation.gestioncommerciale;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 
 import com.mia.itmf.formation.gestioncommerciale.gestion.GestionClient;
 import com.mia.itmf.formation.gestioncommerciale.gestion.GestionFacture;
@@ -18,7 +18,6 @@ public class TestFacture {
 	@Disabled
 	@Test @Order(1)
 	public void test1_afficherFacture() throws Exception {
-		gestionProduit.initialisationProduit();
 		Facture facture = gestionFacture.ajouterFacture(1, gestionClient.retrouverClient(2));
 		facture.ajouterLigneDetail(new DetailDocument(1, 12, gestionProduit.retrouverProduit(1)));
 		facture.ajouterLigneDetail(new DetailDocument(2, 15, gestionProduit.retrouverProduit(2)));
@@ -30,7 +29,6 @@ public class TestFacture {
 	@Disabled
 	@Test @Order(2)
 	public void test3_miseAJourFacture() throws Exception {
-		gestionProduit.initialisationProduit();
 		Facture facture = gestionFacture.ajouterFacture(1, gestionClient.retrouverClient(2));
 		facture.ajouterLigneDetail(new DetailDocument(1, 12, gestionProduit.retrouverProduit(1)));
 		facture.ajouterLigneDetail(new DetailDocument(2, 15, gestionProduit.retrouverProduit(2)));
@@ -41,7 +39,6 @@ public class TestFacture {
 	@Disabled
 	@Test @Order(3)
 	public void test4_supprimerFacture() throws Exception {
-		gestionProduit.initialisationProduit();
 		Facture facture = gestionFacture.ajouterFacture(1, gestionClient.retrouverClient(2));
 		facture.ajouterLigneDetail(new DetailDocument(1, 12, gestionProduit.retrouverProduit(1)));
 		facture.ajouterLigneDetail(new DetailDocument(2, 15, gestionProduit.retrouverProduit(2)));
@@ -52,7 +49,6 @@ public class TestFacture {
 	//@Disabled
 	@Test @Order(4)
 	public void test2_ajouterFacture() throws Exception {
-		gestionProduit.initialisationProduit();
 		Facture facture = gestionFacture.ajouterFacture(1, gestionClient.retrouverClient(2));
 		assertTrue(facture.ajouterLigneDetail(new DetailDocument(1, 12, gestionProduit.retrouverProduit(1))));
 		System.out.println();
