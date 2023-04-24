@@ -16,9 +16,5 @@ public class Facture extends Document {
 		return "Facture-"+getCode();
 	}
 	
-	@Override
-	public String toString() {
-		return super.toString();
-	}
 	
 }

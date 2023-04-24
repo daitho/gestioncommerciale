@@ -41,8 +41,9 @@ public abstract class Document {
 	}
 	
 	public void supprimerLigneDetail(DetailDocument ligneDucument) throws Exception {
-		if(!this.listeDetail.contains(ligneDucument))
+		if(!this.listeDetail.contains(ligneDucument)) {
 			throw new Exception("La ligne entrée n'existe pas dans la liste");
+		}
 		this.listeDetail.remove(ligneDucument.getidDetailDocument());
 		System.out.println("Ligne "+ligneDucument.getidDetailDocument()+" Supprimé." );
 	}
@@ -55,6 +56,7 @@ public abstract class Document {
 		}
 		return null;
 	}
+	
 
 	public double calculMontant() {
 		double total = 0;
@@ -67,6 +69,7 @@ public abstract class Document {
 				total = total + detail.getQuantite()*detail.getPrix();
 			}
 			System.out.println("------------------------------------");
+			System.out.println("Total: "+total);
 			this.montant = total;
 		}
 		return this.montant;
@@ -91,7 +94,8 @@ public abstract class Document {
 	}
 
 	public double getMontant() {
-		return montant;
+		this.montant = calculMontant();
+		return this.montant;
 	}
 
 	public void setMontant(double montant) {
@@ -109,9 +113,8 @@ public abstract class Document {
 	@Override
 	public String toString() {
 		//this.statutListeDetail = true;
-		this.montant = calculMontant();
 		try {
-			return  getKey()+" Nom du client: "+this.client.getNom()+" "+this.client.getPrenom()+" "+"Date : " + this.date+" "+ "Montant total "+getMontant()+"€";
+			return  getKey()+", Nom du client: "+this.client.getNom()+" "+this.client.getPrenom();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
