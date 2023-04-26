@@ -26,7 +26,7 @@ public class GestionDevis extends GestionDocument{
 	}
 	
 	public Devis retrouverDevis(String key) {
-		return  (Devis) retrouverDocument(getKey(key));
+		return  (Devis) super.retrouverDocument(getKey(key));
 	}
 	
 	

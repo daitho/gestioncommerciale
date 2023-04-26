@@ -20,7 +20,7 @@ public abstract class GestionDocument {
 			document.setDate(format.format(date));
 			
 			try {
-
+				
 				System.out.println("Succès !" );
 				map.put(document.getKey(), document);
 				
