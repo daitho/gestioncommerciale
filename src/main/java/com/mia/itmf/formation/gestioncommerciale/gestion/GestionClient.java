@@ -6,21 +6,22 @@ import java.util.List;
 import java.util.Map;
 
 import com.mia.itmf.formation.gestioncommerciale.Client;
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionClient;
 
 public class GestionClient {
 	
 	private Map<Integer, Client> mapClient = new HashMap<Integer, Client>();
 	
 	//Ajout d'un client
-	public void ajoutClient(Client client) {
+	public boolean ajoutClient(Client client) throws ExceptionClient {
 		
 		if(!verifierClient(client)) {
 			mapClient.put(client.getIdClient(), client);
 			System.out.println("Client ajouté !" );
-		}else {
-			System.out.println("Une erreur s'est produit lors de l'ajout du client !" );
+			return true;
 		}
 		
+		throw new ExceptionClient("Une erreur s'est produit lors de l'ajout du client !" );
 	}
 	
 	//Retrouver un Client

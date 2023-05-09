@@ -1,9 +1,6 @@
 package com.mia.itmf.formation.gestioncommerciale;
 
 import com.mia.itmf.formation.gestioncommerciale.gestion.GestionClient;
-import com.mia.itmf.formation.gestioncommerciale.gestion.GestionCommande;
-import com.mia.itmf.formation.gestioncommerciale.gestion.GestionDevis;
-import com.mia.itmf.formation.gestioncommerciale.gestion.GestionFacture;
 import com.mia.itmf.formation.gestioncommerciale.gestion.GestionProduit;
 
 public class Main {
