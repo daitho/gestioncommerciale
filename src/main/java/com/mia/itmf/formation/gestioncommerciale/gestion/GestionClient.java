@@ -1,7 +1,7 @@
 package com.mia.itmf.formation.gestioncommerciale.gestion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +10,7 @@ import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionClien
 
 public class GestionClient {
 	
-	private Map<Integer, Client> mapClient = new HashMap<Integer, Client>();
+	private Map<Integer, Client> mapClient = new LinkedHashMap<Integer, Client>();
 	
 	//Ajout d'un client
 	public boolean ajoutClient(Client client) throws ExceptionClient {
@@ -30,20 +30,35 @@ public class GestionClient {
 	}
 	
 	//Mise à jour du client
-	public void miseAJourClient(Client client) {
+	public boolean miseAJourClient(Client client, String nom, String prenom, String email, String adresse, String telephone) throws ExceptionClient {
 		if(verifierClient(client)) {
-			mapClient.replace(client.getIdClient(), client);
+			client.modifierClient(nom, prenom, adresse, telephone, email);
+			
 			System.out.println("Client mise à jour !" );
+			return true;
 		}
+		
+		throw new ExceptionClient("Client incorrect !");
 	}
 	
 	//Pour verifier si le client existe
-	private boolean verifierClient(Client client) {
-		return client != null && mapClient.containsKey(client.getIdClient());
+	private boolean verifierClient(Client client) throws ExceptionClient {
+		if(client ==null) {
+			throw new ExceptionClient("Client null!");
+		}
+		for (Client valeurClient : mapClient.values()) {
+			if(valeurClient.getNom().equals(client.getNom()) && valeurClient.getPrenom().equals(client.getPrenom())
+					&& valeurClient.getEmail().equals(client.getEmail())
+					&& valeurClient.getTelephone().equals(client.getTelephone())
+					&& valeurClient.getAdresse().equals(client.getAdresse())) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	//Suppresion Client
-    public void supprimerClient(Client client) {
+    public void supprimerClient(Client client) throws ExceptionClient {
     	if(verifierClient(client)) {
     		mapClient.remove(client.getIdClient());
     		System.out.println("Client supprimé !");
@@ -54,7 +69,7 @@ public class GestionClient {
 	}
     
     //afficher Client
-    public void afficherClient(Client client) {
+    public void afficherClient(Client client) throws ExceptionClient {
     	if(verifierClient(client)) {
     		System.out.println("Nom: "+client.getNom()+", Prénom: "+client.getPrenom()+", Ville: "+client.getAdresse()+", Telephone: "+client.getTelephone()+", Email: "+client.getEmail());
     	}else {
@@ -63,12 +78,12 @@ public class GestionClient {
     	
 	}
     
-    public void afficherClient(int key) {
+    public void afficherClient(int key) throws ExceptionClient {
     	afficherClient(retrouverClient(key));
     	
 	}
     
-    public void afficherClient(List<Client> clients) {
+    public void afficherClient(List<Client> clients) throws ExceptionClient {
     	for(Client client : clients) {
     		afficherClient(client);
     	}

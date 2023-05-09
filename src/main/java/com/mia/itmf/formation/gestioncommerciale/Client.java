@@ -1,32 +1,36 @@
 package com.mia.itmf.formation.gestioncommerciale;
 
+import java.util.regex.Pattern;
+
 public class Client {
-	private int idClient;
+	private Integer idClient;
 	private String nom;
 	private String prenom;
 	private String adresse;
 	private String telephone;
 	private String email;
+	private static int COUNT=1;
 	
 	public Client() {
 		super();
+		setIdClient(COUNT++);
 	}
 
-	public Client(int idClient, String nom, String prenom, String adresse, String telephone, String email) {
+	public Client(String nom, String prenom, String adresse, String telephone, String email) {
 		super();
-		this.idClient = idClient;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.telephone = telephone;
-		this.email = email;
+		setIdClient(COUNT++);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setAdresse(adresse);
+		setTelephone(telephone);
 	}
 
 	public int getIdClient() {
 		return idClient;
 	}
 
-	public void setIdClient(int idClient) {
+	protected void setIdClient(int idClient) {
 		this.idClient = idClient;
 	}
 
@@ -34,7 +38,7 @@ public class Client {
 		return nom.toUpperCase();
 	}
 
-	public void setNom(String nom) {
+	protected void setNom(String nom) {
 		this.nom = nom;
 	}
 
@@ -42,7 +46,7 @@ public class Client {
 		return prenom;
 	}
 
-	public void setPrenom(String prenom) {
+	protected void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
@@ -50,7 +54,7 @@ public class Client {
 		return adresse;
 	}
 
-	public void setAdresse(String adresse) {
+	protected void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
 
@@ -58,16 +62,52 @@ public class Client {
 		return telephone;
 	}
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	protected void setTelephone(String telephone) {
+		// Expression régulière pour un entier
+		String pattern = "^-?\\d+$";
+
+		// Vérification de la correspondance avec l'expression régulière
+		if (Pattern.matches(pattern, telephone)) {
+			if(telephone.length() == 10 || telephone.length() == 13) {
+				this.telephone = telephone;
+			}else {
+				System.err.println("La numéro de téléphone "+telephone+" n'est pas correct !.");
+			}
+		} else {
+		    System.err.println("La numéro de téléphone "+telephone+" n'est pas un entier.");
+		}
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	protected void setEmail(String email) {
+		if(email.substring(email.length()-10, email.length()).equals("@gmail.com") || email.substring(email.length()-16, email.length()).equals("@soprasteria.com")) {
+			this.email = email;
+		}else {
+			 System.err.println("Le mail doit se terminer par: @gmail.com ou @soprasteria.com.");
+		}
+	
+	}
+	
+	public void modifierClient(String nom, String prenom, String adresse, String telephone, String email) {
+		if(nom != null) {
+			setNom(nom);
+		}
+		if(prenom!=null) {
+			setPrenom(prenom);
+		}
+		if(email!=null) {
+			setEmail(email);
+		}
+		if(adresse!=null) {
+			setAdresse(adresse);
+		}
+		if(telephone!=null) {
+			setTelephone(telephone);
+		}
+		
 	}
 
 	@Override
