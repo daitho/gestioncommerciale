@@ -1,15 +1,18 @@
 package com.mia.itmf.formation.gestioncommerciale;
 
-import java.util.List;
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionDocument;
 
 public class Devis extends Document {
+	private static int COUNT=1;
 
 	public Devis() {
 		super();
+		setCode(COUNT++);
 	}
 
-	public Devis(int code, String date, double montant, Client client, List<DetailDocument> liste) {
-		super(code, date, montant, client);
+	public Devis(Client client) {
+		super(client);
+		setCode(COUNT++);
 	}
 
 	@Override
@@ -17,7 +20,7 @@ public class Devis extends Document {
 		return super.toString();
 	}
 
-	public String getKey() throws Exception {
+	public String getKey() throws ExceptionDocument{
 		//throw new Exception("La methode getKey doit être surcharger");
 		return "Devis-"+getCode();
 	}

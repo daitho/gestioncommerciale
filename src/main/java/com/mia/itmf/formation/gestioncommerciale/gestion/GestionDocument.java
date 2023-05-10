@@ -7,13 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mia.itmf.formation.gestioncommerciale.Document;
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionDocument;
 
 public abstract class GestionDocument {
 	private Map<String, Document> map = new HashMap<String, Document>();
 	
 	
 	//Ajout
-	protected Document ajouterDocument(Document document){
+	protected Document ajouterDocument(Document document) throws ExceptionDocument{
 		if(!verifierDocument(document)) {
 			DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date date = new Date();
@@ -34,7 +35,7 @@ public abstract class GestionDocument {
 		
 	}
 	
-	protected boolean supprimerDocument(Document document) throws Exception{
+	protected boolean supprimerDocument(Document document) throws ExceptionDocument{
 		if(verifierDocument(document)) {
 			map.remove(document.getKey());
 			return true;
@@ -43,7 +44,10 @@ public abstract class GestionDocument {
 	}
 	
 	//Pour verifier si le produit existe
-	protected boolean verifierDocument(Document document) {
+	protected boolean verifierDocument(Document document) throws ExceptionDocument {
+		if(document == null) {
+			throw new ExceptionDocument("Le "+getClass().getSimpleName()+"est null !");
+		}
 		try {
 			return document != null && verifierDocument(document.getKey());
 		} catch (Exception e) {

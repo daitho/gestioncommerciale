@@ -9,7 +9,7 @@ public class Produit {
 	
 	
 	public Produit() {
-		super();
+		this.codeProduit = COUNT++;
 
 	}
 
@@ -34,7 +34,7 @@ public class Produit {
 		return codeProduit;
 	}
 
-	public void setCodeProduit(int codeProduit) {
+	protected void setCodeProduit(int codeProduit) {
 		this.codeProduit = codeProduit;
 	}
 
@@ -42,7 +42,7 @@ public class Produit {
 		return libelle;
 	}
 
-	public void setLibelle(String libelle) {
+	protected void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
 
@@ -50,7 +50,7 @@ public class Produit {
 		return prix;
 	}
 
-	public void setPrix(Double prix) {
+	protected void setPrix(Double prix) {
 		if(prix!=null && prix>=0) {
 			this.prix = prix;
 		}else {

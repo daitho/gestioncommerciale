@@ -1,19 +1,21 @@
 package com.mia.itmf.formation.gestioncommerciale;
 
-public class Commande extends Document {
-	
-	
-	
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionDocument;
 
+public class Commande extends Document {
+	private static int COUNT=1;
+	
 	public Commande() {
 		super();
+		setCode(COUNT++);
 	}
 
-	public Commande(int code, String date, double montant, Client client) {
-		super(code, date, montant, client);
+	public Commande(Client client) {
+		super(client);
+		setCode(COUNT++);
 	}
 	
-	public String getKey() throws Exception {
+	public String getKey() throws ExceptionDocument {
 		//throw new Exception("La methode getKey doit être surcharger");
 		return "Commande-"+getCode();
 	}

@@ -1,20 +1,27 @@
 package com.mia.itmf.formation.gestioncommerciale.gestion;
 
-import com.mia.itmf.formation.gestioncommerciale.Client;
 import com.mia.itmf.formation.gestioncommerciale.Devis;
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionDocument;
 
 public class GestionDevis extends GestionDocument{
 	
 	public boolean verifierDevis(Devis devis) {
-		return  super.verifierDocument(devis);
+		try {
+			return  super.verifierDocument(devis);
+		} catch (ExceptionDocument e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
-	public Devis ajouterDevis(int code, Client client) {
-		Devis devis = new Devis();
-		devis.setCode(code);
-		devis.setClient(client);
+	public Devis ajouterDevis(Devis devis) {
 		
-		return (Devis) ajouterDocument(devis);
+		try {
+			return (Devis) ajouterDocument(devis);
+		} catch (ExceptionDocument e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public void supprimerDevis(Devis devis) throws Exception {

@@ -1,21 +1,30 @@
 package com.mia.itmf.formation.gestioncommerciale.gestion;
 
-import com.mia.itmf.formation.gestioncommerciale.Client;
 import com.mia.itmf.formation.gestioncommerciale.Commande;
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionDocument;
 
 public class GestionCommande extends GestionDocument{
 	//private Map<Integer, Commande> map = new HashMap<Integer, Commande>();
 	
 	public boolean verifierCommande(Commande commande) {
-		return  super.verifierDocument(commande);
+		try {
+			return  super.verifierDocument(commande);
+		} catch (ExceptionDocument e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
-	public Commande ajouterCommande(int code, Client client) {
-		Commande commande = new Commande();
-		commande.setCode(code);
-		commande.setClient(client);
+	public Commande ajouterCommande(Commande commande) {
 		
-		return (Commande) ajouterDocument(commande);
+		try {
+			return (Commande) ajouterDocument(commande);
+		} catch (ExceptionDocument e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return commande;
 	}
 	
 	public void supprimerCommande(Commande commande) throws Exception {

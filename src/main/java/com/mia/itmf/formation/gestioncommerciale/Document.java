@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionDocument;
+
 public abstract class Document {
 	
 	private int code;
@@ -17,15 +19,12 @@ public abstract class Document {
 	public Document() {
 	}
 	
-	public String getKey() throws Exception {
-		throw new Exception("La methode getKey doit être surcharger");
+	public String getKey() throws ExceptionDocument {
+		throw new ExceptionDocument("La methode getKey doit être surcharger");
 	}
 
-	public Document(int code, String date, double montant, Client client) {
-		this.code = code;
-		this.date = date;
-		this.montant = montant;
-		this.client = client;
+	public Document(Client client) {
+		setClient(client);
 		
 	}
 
@@ -34,27 +33,27 @@ public abstract class Document {
 		return Collections.unmodifiableList(listeDetail);
 	}
 	
-	public boolean ajouterLigneDetail(DetailDocument ligneDetail) throws Exception{
+	public boolean ajouterLigneDetail(DetailDocument ligneDetail) throws ExceptionDocument{
 		if(ligneDetail == null)
-			throw new Exception("La ligne est incorrect !");
+			throw new ExceptionDocument("La ligne est incorrect !");
 		return this.listeDetail.add(ligneDetail);
 	}
 	
-	public void supprimerLigneDetail(DetailDocument ligneDucument) throws Exception {
+	public void supprimerLigneDetail(DetailDocument ligneDucument) throws ExceptionDocument {
 		if(!this.listeDetail.contains(ligneDucument)) {
-			throw new Exception("La ligne entrée n'existe pas dans la liste");
+			throw new ExceptionDocument("La ligne entrée n'existe pas dans la liste");
 		}
 		this.listeDetail.remove(ligneDucument.getidDetailDocument());
 		System.out.println("Ligne "+ligneDucument.getidDetailDocument()+" Supprimé." );
 	}
 	
-	public DetailDocument retrouverLigneDetail(int codeLigneDucument) throws Exception {
+	public DetailDocument retrouverLigneDetail(int codeLigneDucument) throws ExceptionDocument {
 		for(DetailDocument ligneDucument : this.listeDetail) {
 			if(ligneDucument.getidDetailDocument() == codeLigneDucument) {
 				return ligneDucument;
 			}
 		}
-		return null;
+		throw new ExceptionDocument("Cette ligne n'existe pas !");
 	}
 	
 
@@ -81,7 +80,7 @@ public abstract class Document {
 		return code;
 	}
 
-	public void setCode(int code) {
+	protected void setCode(int code) {
 		this.code = code;
 	}
 
@@ -98,7 +97,7 @@ public abstract class Document {
 		return this.montant;
 	}
 
-	public void setMontant(double montant) {
+	protected void setMontant(double montant) {
 		this.montant = montant;
 	}
 
@@ -106,7 +105,7 @@ public abstract class Document {
 		return client;
 	}
 
-	public void setClient(Client client) {
+	protected void setClient(Client client) {
 		this.client = client;
 	}
 
@@ -114,8 +113,8 @@ public abstract class Document {
 	public String toString() {
 		//this.statutListeDetail = true;
 		try {
-			return  getKey()+", Nom du client: "+this.client.getNom()+" "+this.client.getPrenom();
-		} catch (Exception e) {
+			return  getKey()+", Nom du client: "+this.client.getNom()+" "+this.client.getPrenom()+" Montant: "+getMontant();
+		} catch (ExceptionDocument e) {
 			e.printStackTrace();
 		}
 		return null;

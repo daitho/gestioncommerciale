@@ -1,25 +1,35 @@
 package com.mia.itmf.formation.gestioncommerciale.gestion;
 
-import com.mia.itmf.formation.gestioncommerciale.Client;
 import com.mia.itmf.formation.gestioncommerciale.Facture;
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionDocument;
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionFacture;
 
 public class GestionFacture extends GestionDocument{
 	//private Map<String, Facture> map = new HashMap<String, Facture>();
 	
 	
-	public boolean verifierFacture(Facture facture) {
-		return  super.verifierDocument(facture);
+	public boolean verifierFacture(Facture facture) throws ExceptionFacture {
+		try {
+			return  super.verifierDocument(facture);
+		} catch (ExceptionDocument e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
-	public Facture ajouterFacture(int code, Client client) {
-		Facture facture = new Facture();
-		facture.setCode(code);
-		facture.setClient(client);
+	public Facture ajouterFacture(Facture facture) throws ExceptionFacture {
 		
-		return (Facture) ajouterDocument(facture);
+		try {
+			return (Facture) ajouterDocument(facture);
+		} catch (ExceptionDocument e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return facture;
 	}
 	
-	public void supprimerFacture(Facture facture) throws Exception {
+	public void supprimerFacture(Facture facture) throws ExceptionDocument {
 		if(super.supprimerDocument(facture)) {
 			System.out.println("Facture supprimée !");
 		}else {
