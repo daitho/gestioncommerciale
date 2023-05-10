@@ -90,12 +90,9 @@ public class Client {
 	}
 
 	protected boolean setEmail(String email) throws ExceptionClient {
-//		Pattern parttern = Pattern.compile(" ^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$ ");
-//		Matcher matcher = parttern.matcher(email.toUpperCase());
-//		
 //		//email.matches(".+@.+\\.[a-z]+");
-//		//if(matcher.matches()) {
-		if(email.matches(".+@.+\\.[a-z]+")) {
+		
+		if(isEmailAdress(email)) {
 			this.email = email;
 			return true;
 		}
@@ -103,6 +100,13 @@ public class Client {
 		throw new ExceptionClient("L'email "+email+" est incorrect");
 	
 	}
+	
+    public boolean isEmailAdress(String email) {
+        Pattern parttern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
+        Matcher matcher = parttern.matcher(email.toUpperCase());
+        
+        return matcher.matches();
+    }
 	
 	public void modifierClient(String nom, String prenom, String adresse, String telephone, String email) {
 		if(nom != null) {
