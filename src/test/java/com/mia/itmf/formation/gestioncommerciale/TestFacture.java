@@ -17,8 +17,8 @@ public class TestFacture {
 	
 	@BeforeAll
 	public static void init() throws Exception {
-		gestionClient.ajoutClient(new Client(1,"Dupond","Pierre","Nantes", "0602339232","dupondp@gmail.com"));
-		gestionClient.ajoutClient(new Client(2,"Thomas","Paul","Paris", "0602234232","thomaspa@gmail.com"));
+		gestionClient.ajoutClient(new Client("Dupond","Pierre","Nantes", "0602339232","dupondp@gmail.com"));
+		gestionClient.ajoutClient(new Client("Thomas","Paul","Paris", "0602234232","thomaspa@gmail.com"));
 		System.out.println("Produit initialisé !" );
 		gestionProduit.ajoutProduit(new Produit(1,"Pomme",100));
 		gestionProduit.ajoutProduit(new Produit(2,"Tomate",50));

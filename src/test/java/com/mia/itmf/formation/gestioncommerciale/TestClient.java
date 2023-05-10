@@ -21,10 +21,7 @@ public class TestClient {
 		try {
 			gestionClient.ajoutClient(new Client("Dupond","Pierre","Nantes", "0602339232","dupondp@gmail.com"));
 			gestionClient.ajoutClient(new Client("Thomas","Paul","Paris", "0602234232","thomaspa@gmail.com"));
-			gestionClient.ajoutClient(new Client("Jean","Joseph","Limoges", "06045653","jeanjo@gmail.com"));
-			String text = "jeanjo@gmail.com";
-			
-			System.out.println(text.substring(text.length()-10,text.length()));
+			gestionClient.ajoutClient(new Client("Jean","Joseph","Limoges", "0633045653","jeanjo@gmail.com"));
 		} catch (ExceptionClient e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

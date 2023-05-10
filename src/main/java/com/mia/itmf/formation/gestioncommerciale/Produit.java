@@ -4,7 +4,8 @@ public class Produit {
 	
 	private int codeProduit;
 	private String libelle;
-	private double prix;
+	private Double prix;
+	private static int COUNT=1;
 	
 	
 	public Produit() {
@@ -12,11 +13,21 @@ public class Produit {
 
 	}
 
-	public Produit(int codeProduit, String libelle, double prix) {
+	public Produit(String libelle, double prix) {
 		super();
-		this.codeProduit = codeProduit;
-		this.libelle = libelle;
-		this.prix = prix;
+		this.codeProduit = COUNT++;
+		setLibelle(libelle);
+		setPrix(prix);
+	}
+	
+	public void modifierProduit(String libelle, Double prix) {
+		if(libelle != null) {
+			setLibelle(libelle);
+		}
+		if(prix!=null) {
+			setPrix(prix);
+		}
+		
 	}
 
 	public int getCodeProduit() {
@@ -35,12 +46,17 @@ public class Produit {
 		this.libelle = libelle;
 	}
 
-	public double getPrix() {
+	public Double getPrix() {
 		return prix;
 	}
 
-	public void setPrix(double prix) {
-		this.prix = prix;
+	public void setPrix(Double prix) {
+		if(prix!=null && prix>=0) {
+			this.prix = prix;
+		}else {
+			System.err.println("Le prix du produit ne doit pas être null ou vide !");
+		}
+		
 	}
 
 	@Override

@@ -4,14 +4,6 @@ import com.mia.itmf.formation.gestioncommerciale.gestion.GestionClient;
 import com.mia.itmf.formation.gestioncommerciale.gestion.GestionProduit;
 
 public class Main {
-	static Chien chien;
-	public enum Chien{
-		Boledogue, Caniche, Carlin, Cairn, Cocker, Dobermann, DogueAllemand;
-	}
-	
-	public static Chien getChien() {
-		return chien;
-	}
 
 	public static void main(String[] args) throws Exception {
 		
@@ -19,12 +11,10 @@ public class Main {
 		
 		GestionClient gestionClient = new GestionClient();
 		//gestionClient.initialisationClient();
-		gestionClient.ajoutClient(new Client(4,"Max","Louis","Nantes", "0902339232","mlouis@gmail.com"));
+		gestionClient.ajoutClient(new Client("Max","Louis","Nantes", "0902339232","mlouis@gmail.com"));
 		gestionClient.supprimerClient(gestionClient.retrouverClient(1));
 		gestionClient.afficherClient(1);
 		gestionClient.afficherClient(gestionClient.rechercherClientsParNom("M"));
-		getChien();
-		System.out.println(Chien.Dobermann);
 		
 		//Initialisation de Produit
 		GestionProduit gestionProduit = new GestionProduit();

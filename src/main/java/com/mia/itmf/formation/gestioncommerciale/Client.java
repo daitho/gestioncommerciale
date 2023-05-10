@@ -13,12 +13,12 @@ public class Client {
 	
 	public Client() {
 		super();
-		setIdClient(COUNT++);
+		this.idClient = COUNT++;
 	}
 
 	public Client(String nom, String prenom, String adresse, String telephone, String email) {
 		super();
-		setIdClient(COUNT++);
+		this.idClient = COUNT++;
 		setNom(nom);
 		setPrenom(prenom);
 		setEmail(email);

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.mia.itmf.formation.gestioncommerciale.Client;
 import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionClient;
+import com.mia.itmf.formation.gestioncommerciale.tools.MapTool;
 
 public class GestionClient {
 	
@@ -28,6 +29,45 @@ public class GestionClient {
     public Client retrouverClient(Integer key) {
 		return mapClient.get(key);
 	}
+    
+	public Client retrouverUnClient(String nom, String prenom, String email, String tel, String adresse)
+			throws ExceptionClient {
+
+		return MapTool.getMapElement(mapClient, Client.class, false,
+				addElementListClient(nom, prenom, email, tel, adresse));
+	}
+
+	public List<Client> retrouverClient(String nom, String prenom, String email, String tel, String adresse,
+			boolean unique) throws ExceptionClient {
+		return MapTool.getMapElements(mapClient, unique, addElementListClient(nom, prenom, email, tel, adresse));
+	}
+	
+    
+	private List<MapTool.SearchCriteria<Client>> addElementListClient(String nom, String prenom, String email,
+			String tel, String adresse) throws ExceptionClient {
+		List<MapTool.SearchCriteria<Client>> criteriaList = new ArrayList<>();
+
+		if (nom == null && prenom == null && email == null && tel == null && adresse == null) {
+			throw new ExceptionClient("Aucun attribut du client n'est inséré !");
+		}
+
+		if (nom != null) {
+			criteriaList.add(new MapTool.SearchCriteria<>(Client::getNom, nom));
+		}
+		if (prenom != null) {
+			criteriaList.add(new MapTool.SearchCriteria<>(Client::getPrenom, prenom));
+		}
+		if (email != null) {
+			criteriaList.add(new MapTool.SearchCriteria<>(Client::getEmail, email));
+		}
+		if (tel != null) {
+			criteriaList.add(new MapTool.SearchCriteria<>(Client::getTelephone, tel));
+		}
+		if (adresse != null) {
+			criteriaList.add(new MapTool.SearchCriteria<>(Client::getAdresse, adresse));
+		}
+		return criteriaList;
+	}
 	
 	//Mise à jour du client
 	public boolean miseAJourClient(Client client, String nom, String prenom, String email, String adresse, String telephone) throws ExceptionClient {
@@ -46,6 +86,7 @@ public class GestionClient {
 		if(client ==null) {
 			throw new ExceptionClient("Client null!");
 		}
+		
 		for (Client valeurClient : mapClient.values()) {
 			if(valeurClient.getNom().equals(client.getNom()) && valeurClient.getPrenom().equals(client.getPrenom())
 					&& valeurClient.getEmail().equals(client.getEmail())
