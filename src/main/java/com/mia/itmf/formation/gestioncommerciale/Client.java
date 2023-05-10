@@ -1,6 +1,9 @@
 package com.mia.itmf.formation.gestioncommerciale;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.mia.itmf.formation.gestioncommerciale.gestionException.ExceptionClient;
 
 public class Client {
 	private Integer idClient;
@@ -21,7 +24,11 @@ public class Client {
 		this.idClient = COUNT++;
 		setNom(nom);
 		setPrenom(prenom);
-		setEmail(email);
+		try {
+			setEmail(email);
+		} catch (ExceptionClient e) {
+			e.printStackTrace();
+		}
 		setAdresse(adresse);
 		setTelephone(telephone);
 	}
@@ -82,12 +89,18 @@ public class Client {
 		return email;
 	}
 
-	protected void setEmail(String email) {
-		if(email.substring(email.length()-10, email.length()).equals("@gmail.com") || email.substring(email.length()-16, email.length()).equals("@soprasteria.com")) {
+	protected boolean setEmail(String email) throws ExceptionClient {
+//		Pattern parttern = Pattern.compile(" ^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$ ");
+//		Matcher matcher = parttern.matcher(email.toUpperCase());
+//		
+//		//email.matches(".+@.+\\.[a-z]+");
+//		//if(matcher.matches()) {
+		if(email.matches(".+@.+\\.[a-z]+")) {
 			this.email = email;
-		}else {
-			 System.err.println("Le mail doit se terminer par: @gmail.com ou @soprasteria.com.");
+			return true;
 		}
+		
+		throw new ExceptionClient("L'email "+email+" est incorrect");
 	
 	}
 	
@@ -99,7 +112,11 @@ public class Client {
 			setPrenom(prenom);
 		}
 		if(email!=null) {
-			setEmail(email);
+			try {
+				setEmail(email);
+			} catch (ExceptionClient e) {
+				e.printStackTrace();
+			}
 		}
 		if(adresse!=null) {
 			setAdresse(adresse);

@@ -17,15 +17,12 @@ public class TestClient {
 	private static GestionClient gestionClient = new GestionClient();
 	
 	@BeforeAll
-	public static void init() {
-		try {
-			gestionClient.ajoutClient(new Client("Dupond","Pierre","Nantes", "0602339232","dupondp@gmail.com"));
-			gestionClient.ajoutClient(new Client("Thomas","Paul","Paris", "0602234232","thomaspa@gmail.com"));
-			gestionClient.ajoutClient(new Client("Jean","Joseph","Limoges", "0633045653","jeanjo@gmail.com"));
-		} catch (ExceptionClient e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public static void init() throws ExceptionClient{
+		
+		gestionClient.ajoutClient(new Client("Dupond","Pierre","Nantes", "0602339232","dupondp@gmail.com"));
+		gestionClient.ajoutClient(new Client("Thomas","Paul","Paris", "0602234232","thomaspa@gmail.com"));
+		gestionClient.ajoutClient(new Client("Jean","Joseph","Limoges", "0633045653","jeanjo@gmail.com"));
+		
 		System.out.println("Client initialisé !" );
 		
 	}
@@ -39,10 +36,10 @@ public class TestClient {
 	//@Disabled
 	@Test @Order(2)
 	public void test2_ajouterClient() {
+		assertEquals(gestionClient.getNombreClient(), 3);
 		try {
 			gestionClient.ajoutClient(new Client("Max","Louis","Nantes", "0902339232","mlouis@gmail.com"));
 		} catch (ExceptionClient e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertEquals(gestionClient.getNombreClient(), 4);
@@ -51,10 +48,11 @@ public class TestClient {
 	//@Disabled
 	@Test @Order(3)
 	public void test3_supprimerClient() {
+
+		assertEquals(gestionClient.getNombreClient(), 4);
 		try {
 			gestionClient.supprimerClient(gestionClient.retrouverClient(4));
 		} catch (ExceptionClient e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertEquals(gestionClient.getNombreClient(), 3);
@@ -77,14 +75,13 @@ public class TestClient {
 	}
 	
 	@AfterAll
-	public static void supprimerTousLesTest() {
+	public static void supprimerLesClientsDeTest() {
 		assertEquals(3, gestionClient.getNombreClient());
 		try {
 			gestionClient.supprimerClient(gestionClient.retrouverClient(1));
 			gestionClient.supprimerClient(gestionClient.retrouverClient(2));
 			gestionClient.supprimerClient(gestionClient.retrouverClient(3));
 		} catch (ExceptionClient e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertEquals(0, gestionClient.getNombreClient());
