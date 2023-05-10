@@ -91,10 +91,12 @@ public class Client {
 
 	protected boolean setEmail(String email) throws ExceptionClient {
 //		//email.matches(".+@.+\\.[a-z]+");
-		
 		if(isEmailAdress(email)) {
-			this.email = email;
-			return true;
+			if(emailAdressAccept(email)) {
+				this.email = email;
+				return true;
+			}
+			throw new ExceptionClient(email+": Ne pas utiliser . - et _ caractères consécutivement");
 		}
 		
 		throw new ExceptionClient("L'email "+email+" est incorrect");
@@ -102,10 +104,22 @@ public class Client {
 	}
 	
     public boolean isEmailAdress(String email) {
-        Pattern parttern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
-        Matcher matcher = parttern.matcher(email.toUpperCase());
+        Pattern parttern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+        Matcher matcher = parttern.matcher(email);
         
         return matcher.matches();
+    }
+    
+    private boolean emailAdressAccept(String email) {
+    	for(int i = 0; i < email.length(); i++) {
+    		if(email.charAt(i) == '-' || email.charAt(i) == '.' || email.charAt(i) == '_') {
+    			if(email.charAt(i+1) == '-' || email.charAt(i+1) == '.' || email.charAt(i+1) == '_') {
+        			return false;
+        		}
+    		}
+    	}
+		return true;
+    	
     }
 	
 	public void modifierClient(String nom, String prenom, String adresse, String telephone, String email) {
@@ -136,9 +150,6 @@ public class Client {
 		return "Client [idClient=" + getIdClient() + ", nom=" + getNom() + ", prenom=" + getPrenom() + ", adresse=" + getAdresse()
 				+ ", telephone=" + getTelephone() + ", email=" + getEmail() + "]";
 	}
-	
-	
-	
 	
 	
 
