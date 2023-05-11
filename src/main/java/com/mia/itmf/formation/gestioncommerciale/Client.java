@@ -96,7 +96,7 @@ public class Client {
 				this.email = email;
 				return true;
 			}
-			throw new ExceptionClient(email+": Ne pas utiliser '.', '-' et '_' caractères consécutivement");
+			throw new ExceptionClient(email+": Ne pas utiliser '.', '-' et '_' caractères consécutivement !");
 		}
 		
 		throw new ExceptionClient("L'email "+email+" est incorrect");
@@ -112,8 +112,14 @@ public class Client {
     
     private boolean emailAdressAccept(String email) throws ExceptionClient {
     	for(int i = 0; i < email.length(); i++) {
-    		if(email.charAt(i) == '@' && email.substring(0, i).length()<3) {
-        		throw new ExceptionClient(email+" est incorrect: Utilisez au moins 3 caractères");
+    		if(email.charAt(i) == '@') {
+    			if(email.substring(0, i).length()<3) {
+    				throw new ExceptionClient(email+" est incorrect: Utilisez au moins 3 caractères");
+    			}
+    			if(email.charAt(i-1) == '-' || email.charAt(i-1) == '.' || email.charAt(0) == '_' || email.charAt(0) == '-' || email.charAt(0) == '.' || email.charAt(0) == '_') {
+    				throw new ExceptionClient(email+" est incorrect: Ne pas utiliser . - et _ caractères au début ou à la fin !");
+    			}
+        		
     		}
     	}
     	

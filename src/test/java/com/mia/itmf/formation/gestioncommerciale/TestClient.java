@@ -19,7 +19,7 @@ public class TestClient {
 	@BeforeAll
 	public static void init() throws ExceptionClient{
 		
-		gestionClient.ajoutClient(new Client("Dupond","Pierre","Nantes", "0xxxx","dupondp@gmail.com"));
+		gestionClient.ajoutClient(new Client("Dupond","Pierre","Nantes", "0556767787",".aa@gmail.com"));
 		gestionClient.ajoutClient(new Client("Thomas","Paul","Paris", "0602234232","thomaspa@gmail.com"));
 		gestionClient.ajoutClient(new Client("Jean","Joseph","Limoges", "0633045653","jeanjo@gmail.com"));
 		
