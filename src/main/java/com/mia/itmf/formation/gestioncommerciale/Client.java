@@ -96,7 +96,7 @@ public class Client {
 				this.email = email;
 				return true;
 			}
-			throw new ExceptionClient(email+": Ne pas utiliser . - et _ caractères consécutivement");
+			throw new ExceptionClient(email+": Ne pas utiliser '.', '-' et '_' caractères consécutivement");
 		}
 		
 		throw new ExceptionClient("L'email "+email+" est incorrect");
@@ -110,9 +110,14 @@ public class Client {
         return matcher.matches();
     }
     
-    private boolean emailAdressAccept(String email) {
+    private boolean emailAdressAccept(String email) throws ExceptionClient {
     	for(int i = 0; i < email.length(); i++) {
-    		
+    		if(email.charAt(i) == '@' && email.substring(0, i).length()<3) {
+        		throw new ExceptionClient(email+" est incorrect: Utilisez au moins 3 caractères");
+    		}
+    	}
+    	
+    	for(int i = 0; i < email.length(); i++) {
     		if((email.charAt(i) == '-' || email.charAt(i) == '.' || email.charAt(i) == '_') && (email.charAt(i+1) == '-' || email.charAt(i+1) == '.' || email.charAt(i+1) == '_')) {
     			return false;
     		}
