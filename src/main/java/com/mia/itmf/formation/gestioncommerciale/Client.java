@@ -104,7 +104,7 @@ public class Client {
 	}
 	
     public boolean isEmailAdress(String email) {
-        Pattern parttern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+        Pattern parttern = Pattern.compile("^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
         Matcher matcher = parttern.matcher(email);
         
         return matcher.matches();
@@ -112,10 +112,9 @@ public class Client {
     
     private boolean emailAdressAccept(String email) {
     	for(int i = 0; i < email.length(); i++) {
-    		if(email.charAt(i) == '-' || email.charAt(i) == '.' || email.charAt(i) == '_') {
-    			if(email.charAt(i+1) == '-' || email.charAt(i+1) == '.' || email.charAt(i+1) == '_') {
-        			return false;
-        		}
+    		
+    		if((email.charAt(i) == '-' || email.charAt(i) == '.' || email.charAt(i) == '_') && (email.charAt(i+1) == '-' || email.charAt(i+1) == '.' || email.charAt(i+1) == '_')) {
+    			return false;
     		}
     	}
 		return true;
